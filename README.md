@@ -9,5 +9,5 @@ Example usage with gorilla/mux:
 ```go
 log := logrus.StandardLogger()
 router := mux.NewRouter()
-router.Use(WithHTTPLogging(log.WithField("service": "my-http-service")))
+router.Use(WithHTTPLogging(log.WithField("service", "my-http-service")))
 ```
