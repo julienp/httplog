@@ -29,6 +29,7 @@ func WithHTTPLogging(log *logrus.Entry) func(http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			record := &LogRecord{
 				ResponseWriter: w,
+				status:         200,
 			}
 			h.ServeHTTP(record, r)
 
