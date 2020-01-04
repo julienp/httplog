@@ -1,6 +1,7 @@
 package httplog
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -57,6 +58,9 @@ func TestLogLevel(t *testing.T) {
 	router.HandleFunc("/error", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(502)
 	})
+	router.HandleFunc("/default", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello Word!")
+	})
 
 	tests := []struct {
 		path  string
@@ -65,6 +69,7 @@ func TestLogLevel(t *testing.T) {
 		{"/ok", logrus.InfoLevel},
 		{"/warn", logrus.WarnLevel},
 		{"/error", logrus.ErrorLevel},
+		{"/default", logrus.InfoLevel},
 	}
 
 	for _, test := range tests {
